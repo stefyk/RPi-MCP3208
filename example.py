@@ -3,7 +3,6 @@
 import spidev
 import time
 
-class MCP3208:
 	spi_channel = 0
 	   
     	#Enable SPI
@@ -13,7 +12,7 @@ class MCP3208:
 	# Hardware SPI configuration:
 	SPI_PORT   = 0
 	SPI_DEVICE = 0
-	mcp = Adafruit_MCP3208.MCP3208(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+	
 
     	def read_adc(adc_channel, Vref = 3.3):
 		if adc_channel != 0:
