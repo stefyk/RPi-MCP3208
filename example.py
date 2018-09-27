@@ -4,9 +4,9 @@ import spidev
 import time
 
 class MCP3208:
-spi_channel = 0
+	spi_channel = 0
 	   
-    #Enable SPI
+    	#Enable SPI
 	spi = spidev.SpiDev(0, spi_channel)
     	spi.max_speed_hz = 1000000
 
