@@ -4,18 +4,18 @@ import spidev
 import time
 
 class MCP3208:
-    spi_channel = 0
+	spi_channel = 0
 	   
-	#Enable SPI
+    	#Enable SPI
 	spi = spidev.SpiDev(0, spi_channel) #using this function since importing MCP3208 gives a permission error
-    spi.max_speed_hz = 1000000
+    	spi.max_speed_hz = 1000000
 
 	# Hardware SPI configuration:
 	SPI_PORT   = 0
 	SPI_DEVICE = 0
 	mcp = Adafruit_MCP3208.MCP3208(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-    def read_adc(adc_channel, Vref = 3.3):
+    	def read_adc(adc_channel, Vref = 3.3):
 		if adc_channel != 0:
             adc_channel = 1
 			
