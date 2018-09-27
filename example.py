@@ -22,7 +22,7 @@ class MCP3208:
 		msg = 0b11
 		msg = ((msg << 1) + adc_channel) << 5
 		msg = [msg, 0b00000000]
-	    reply = spi.xfer2(msg)
+	    	reply = spi.xfer2(msg)
 	
 		# Construct single integer out of the reply (2 bytes)
 		adc = 0
