@@ -2,6 +2,7 @@
 
 import spidev
 import time
+import GPIO
 
 spi_channel = 0
 	   
