@@ -17,7 +17,7 @@ class MCP3208:
 
     	def read_adc(adc_channel, Vref = 3.3):
 		if adc_channel != 0:
-            adc_channel = 1
+            		adc_channel = 1
 			
 		msg = 0b11
 		msg = ((msg << 1) + adc_channel) << 5
