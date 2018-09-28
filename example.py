@@ -1,8 +1,8 @@
-#This code has been build, using different example codes and is still unfinished
+#This code has been developed, using 
+#https://learn.sparkfun.com/tutorials/python-programming-tutorial-getting-started-with-the-raspberry-pi/experiment-3-spi-and-analog-input
 
 import spidev
 import time
-import RPi.GPIO as GPIO
 
 spi_channel = 0
 	   
@@ -16,8 +16,7 @@ SPI_DEVICE = 0
 	
 
 def read_adc(adc_channel, Vref = 3.3):
-	if adc_channel != 0:
-        	adc_channel = 1
+	adc_channel = 0
 			
 	msg = 0b11
 	msg = ((msg << 1) + adc_channel) << 5
@@ -33,7 +32,7 @@ def read_adc(adc_channel, Vref = 3.3):
 	adc = adc >> 1
 
 	# Calculate voltage form ADC value
-	Voltage = (Vref * adc) / 1024
+	Voltage = (3.3 * adc) / 1024
         
 	return Voltage
 			
@@ -43,7 +42,5 @@ try:
 		adc_0 = read_adc(0)
 		adc_1 = read_adc(1)
 		# Print the ADC values.
-		print("The amplitude of V from Ch.0 is:", round(adc_0, 2), "V Ch 1:", round(adc_1, 2), "V")
+		print("The amplitude of V from Ch.0 is:", round(adc_0, 2),"V")
 		time.sleep(0.5)
-finally:  
-	GPIO.cleanup()
