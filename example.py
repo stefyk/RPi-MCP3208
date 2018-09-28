@@ -2,7 +2,7 @@
 
 import spidev
 import time
-import GPIO
+import RPi.GPIO as GPIO
 
 spi_channel = 0
 	   
