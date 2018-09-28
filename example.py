@@ -32,7 +32,7 @@ def read_adc(adc_channel, Vref = 3.3):
 	adc = adc >> 1
 
 	# Calculate voltage form ADC value
-	Voltage = (3.3 * adc) / 1024
+	Voltage = (Vref * adc) / 4096
         
 	return Voltage
 try:			
