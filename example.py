@@ -17,7 +17,7 @@ SPI_DEVICE = 0
 def read_adc(adc_channel, Vref = 3.3):
 	adc_channel = 0
 			
-	data = 0b1111
+	data = 0b11
 	data = ((data << 2) + adc_channel) << 6
 	data = [data, 0b0000000000]
 	#Performs the SPI transaction and assigns the data to "reply"
@@ -29,7 +29,7 @@ def read_adc(adc_channel, Vref = 3.3):
 		adc = (adc << 10) + n
 
 	# Last bit (0) is not part of ADC value, shift to remove it
-	adc = adc >> 1
+	adc = adc >> 2
 
 	# Calculate voltage form ADC value
 	Voltage = (Vref * adc) / 4096
