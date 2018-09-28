@@ -39,12 +39,11 @@ def read_adc(adc_channel, Vref = 3.3):
 			
 try:		
 	while True:
-		spi = MCP3208(0)
 		# The read_adc function will get the value of the specified channel (0-1).
 		adc_0 = read_adc(0)
 		adc_1 = read_adc(1)
 		# Print the ADC values.
-		print("Ch 0:", round(adc_0, 2), "V Ch 1:", round(adc_1, 2), "V")
+		print("The amplitude of V from Ch.0 is:", round(adc_0, 2), "V Ch 1:", round(adc_1, 2), "V")
 		time.sleep(0.5)
 finally:  
 	GPIO.cleanup()
