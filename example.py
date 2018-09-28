@@ -18,7 +18,7 @@ def read_adc(adc_channel, Vref = 3.3):
 	adc_channel = 0
 			
 	data = 0b11
-	data = ((data << 2) + adc_channel) << 6
+	data = ((data << 1) + adc_channel) << 5
 	data = [data, 0b0000000000]
 	#Performs the SPI transaction and assigns the data to "reply"
 	reply = spi.xfer2(data)
