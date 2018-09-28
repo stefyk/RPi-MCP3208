@@ -35,7 +35,7 @@ def read_adc(adc_channel, Vref = 3.3):
 	Voltage = (3.3 * adc) / 1024
         
 	return Voltage
-				
+try:			
 	while True:
 		# The read_adc function will get the value of the specified channel (0-1).
 		adc_0 = read_adc(0)
@@ -43,3 +43,5 @@ def read_adc(adc_channel, Vref = 3.3):
 		# Print the ADC values.
 		print("The amplitude of V from Ch.0 is:", round(adc_0, 2),"V")
 		time.sleep(0.5)
+finally:
+	close()
