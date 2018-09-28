@@ -17,7 +17,7 @@ SPI_DEVICE = 0
 def read_adc(adc_channel, Vref = 3.3):
 	adc_channel = 0
 			
-	data = 0b11
+	data = 0b111
 	data = ((data << 1) + adc_channel) << 6
 	data = [data, 0b0000000000]
 	#Performs the SPI transaction and assigns the data to "reply"
