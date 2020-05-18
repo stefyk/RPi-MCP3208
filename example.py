@@ -11,8 +11,8 @@ spi = spidev.SpiDev(0, spi_channel)
 spi.max_speed_hz = 1000000
 
 # Hardware SPI configuration (wiring explained in README file):
-SPI_PORT   = 0
-SPI_DEVICE = 0
+#SPI_PORT   = 0
+#SPI_DEVICE = 0
 
 def read_adc(adc_channel, Vref = 3.3):
 	adc_channel = 0
