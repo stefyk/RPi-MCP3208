@@ -42,7 +42,7 @@ try:
 		# The read_adc function will get the value of the specified channel (0-1).
 		adc_0 = read_adc(0)
 		# Print the ADC values.
-		print("The amplitude of V from Ch.0 is:", round(adc_0, 2),"V")
+		print("The amplitude of V from Ch.0 is:", round(Voltage, 2),"V")
 		time.sleep(0.5)
 finally:
 	#closing the SPI channel
