@@ -19,7 +19,7 @@ def read_adc(adc_channel, Vref = 3.3):
 			
 	data = 0b11
 	
-    adc = spi.xfer2([6+((4&channel)>>2),(3&channel)<<6,0])
+    adc = spi.xfer2([6+((4&adc_channel)>>2),(3&adc_channel)<<6,0])
     data = ((adc[1]&15) << 8) + adc[2]
     return data
 	#Performs the SPI transaction and assigns the data to "reply"
@@ -28,13 +28,13 @@ def read_adc(adc_channel, Vref = 3.3):
 	# Construct single integer out of the reply (2 bytes)
 	adc = 0
 	for n in reply:
-		adc = (adc << 8) + n
+		adc = (adc << 10) + n
 
 	# Last bit (0) is not part of ADC value, shift to remove it
 	adc = adc >> 1
 
 	# Calculate voltage form ADC value
-	Voltage = (Vref * adc) / 256
+	Voltage = (Vref * adc) / 4095
         
 	return Voltage
 try:			
