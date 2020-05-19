@@ -15,7 +15,7 @@ spi.max_speed_hz = 100000
 #SPI_DEVICE = 0
 
 def read_adc(adc_channel, Vref = 3.3):
-	#adc_channel = 0
+	adc_channel = 0
 			
 	data = 0b11
 	
@@ -28,7 +28,7 @@ def read_adc(adc_channel, Vref = 3.3):
 	# Construct single integer out of the reply (2 bytes)
 	adc = 0
 	for n in reply:
-		adc = (adc << 10) + n
+		adc = (adc << 8) + n
 
 	# Last bit (0) is not part of ADC value, shift to remove it
 	adc = adc >> 1
