@@ -1,51 +1,49 @@
-#RPi MCP3008 tryout code
+#This code has been developed, using 
+#https://learn.sparkfun.com/tutorials/python-programming-tutorial-getting-started-with-the-raspberry-pi/experiment-3-spi-and-analog-input
 
-import time
 import spidev
+import time
 
-spi_ch = 0
+spi_channel = 0
+	   
+#Enable SPI
+spi = spidev.SpiDev(0, spi_channel)
+spi.max_speed_hz = 100000
 
-# Enable SPI
-spi = spidev.SpiDev(0, spi_ch)
-spi.max_speed_hz = 1200000
+# Hardware SPI configuration (wiring explained in README file):
+#SPI_PORT   = 0
+#SPI_DEVICE = 0
 
-def read_adc(adc_ch, vref = 3.3):
+def read_adc(adc_channel, Vref = 3.3):
+	#adc_channel = 0
+			
+	data = 0b11
+	
+    adc = spi.xfer2([6+((4&channel)>>2),(3&channel)<<6,0])
+    data = ((adc[1]&15) << 8) + adc[2]
+    return data
+	#Performs the SPI transaction and assigns the data to "reply"
+	reply = spi.xfer2(data)
+	
+	# Construct single integer out of the reply (2 bytes)
+	adc = 0
+	for n in reply:
+		adc = (adc << 8) + n
 
-    # Make sure ADC channel is 0 or 1
-    if adc_ch != 0:
-        adc_ch = 1
+	# Last bit (0) is not part of ADC value, shift to remove it
+	adc = adc >> 1
 
-    # Construct SPI message
-    #  First bit (Start): Logic high (1)
-    #  Second bit (SGL/DIFF): 1 to select single mode
-    #  Third bit (ODD/SIGN): Select channel (0 or 1)
-    #  Fourth bit (MSFB): 0 for LSB first
-    #  Next 12 bits: 0 (don't care)
-    msg = 0b11
-    msg = ((msg << 1) + adc_ch) << 5
-    msg = [msg, 0b00000000]
-    reply = spi.xfer2(msg)
-
-    # Construct single integer out of the reply (2 bytes)
-    adc = 0
-    for n in reply:
-        adc = (adc << 8) + n
-
-    # Last bit (0) is not part of ADC value, shift to remove it
-    adc = adc >> 1
-
-    # Calculate voltage form ADC value
-    voltage = (vref * adc) / 4096
-
-    return voltage
-
-# Report the channel 0 and channel 1 voltages to the terminal
-try:
-    while True:
-        adc_0 = read_adc(0)
-        adc_1 = read_adc(1)
-        print("Ch 0:", round(adc_0, 2), "V Ch 1:", round(adc_1, 2), "V")
-        time.sleep(0.2)
-
+	# Calculate voltage form ADC value
+	Voltage = (Vref * adc) / 256
+        
+	return Voltage
+try:			
+	while True:
+		# The read_adc function will get the value of the specified channel (0-1).
+		adc_0 = read_adc(0)
+		# Print the ADC values.
+		print("The amplitude of V from Ch.0 is:", round(adc_0, 2),"V")
+		time.sleep(0.5)
 finally:
-    GPIO.cleanup()
+	#closing the SPI channel
+	close()
